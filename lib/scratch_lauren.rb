@@ -1,0 +1,1 @@
+# The global constant ARGF (also accessible as $<) provides an IO-like stream which allows access to all files mentioned on the command line (or STDIN if no files are mentioned). ARGF#path and its alias ARGF#filename are provided to access the name of the file currently being read.
