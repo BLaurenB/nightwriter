@@ -1,0 +1,42 @@
+Project!
+
+General tasks:
+
+* figure out the best storage and format for upper and lowercase letter arrays.
+* done?
+
+* write some code that will take in a file, do something simple and spit out a file.
+who:
+
+ *do a hello world file that creates a 3 line output
+quick?
+who:
+
+ * make a simple script that converts 1 character to Braille
+who
+
+* make a script that takes in a 1-char textfile and returns a braille file.
+quick?
+who:
+
+* make a script that has a single braille array and returns a text file with a single character
+who:
+
+* determine how to read in text — especially if the characters break across lines. Use one of the  methods already created for this by other rubyists — they can read in and split an array per line already!
+idea:
+either compare the whole character against all whole characters (using .match)
+
+
+* make a script that translates words and phrases into braille
+who
+
+* make a script that takes in a file, applies the translation, writes it to another file and prints out a message in the terminal after running
+who:
+
+* make a script that translates braille words into alpha characters
+parts:
+read in the data (should be completed by this time
+if it’s read in
+
+* make a script that takes in a file, applies the translation, writes it to another file and prints out a message in the terminal after running
+who:
