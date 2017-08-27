@@ -1,7 +1,6 @@
 class NightWriter
 
   attr_reader :characters, :top, :middle, :bottom
-
   def initialize
     @characters = {'a' => ['0.', '..', '..'],
     'b' => ['0.', '0.', '..'],
@@ -53,19 +52,10 @@ class NightWriter
     @bottom = []
   end
 
-=begin
-  def print_letter(letter)
-    #input one character
-    @characters[letter].join "\n"
-    #takes the letter key and returns the value array
-    #joins with new line character
-  end
-  (this method may no longer be needed)
-=end
 
-  def print_character(letter)
+  def print_character(character)
     #require 'pry'; binding.pry
-    @characters[letter].each_with_index do |braille, index|
+    @characters[character].each_with_index do |braille, index|
       if index == 0
         @top << braille
       elsif index == 1
@@ -77,16 +67,19 @@ class NightWriter
   end
 
   def print_words(word)
-    character = word.split("")
+    single_characters = word.split("")
     #splits word into characters
-    character.each { |letter| print_character(letter)}
+    single_characters.each { |character| print_character(character)}
     #should be sending one character at a time to print_character method
     line_1 = @top.join("")
     line_2 = @middle.join("")
     line_3 = @bottom.join("")
+    #reset the array's to empty for next word
+    @top = []
+    @middle = []
+    @bottom = []
     #creates one string from each array
-    line_1 + "\n" + line_2 + "\n" + line_3
-    #joinging the strings with a new line before each array
+    line_1.concat("\n").concat(line_2).concat("\n").concat(line_3)
   end
 
 end
