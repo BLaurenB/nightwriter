@@ -1,6 +1,6 @@
 class NightWriter
 
-  attr_reader :characters
+  attr_reader :characters, :top, :middle, :bottom
 
   def initialize
     @characters = {'a' => ['0.', '..', '..'],
@@ -48,11 +48,38 @@ class NightWriter
     '8' => ['0.', '00', '..'],
     '9' => ['.0', '0.', '..'],
     ' ' => ['..', '..', '..'] }
+    @top = []
+    @middle = []
+    @bottom = []
   end
 
   def print_letter(letter)
+    #input one character
     @characters[letter].join "\n"
+    #takes the letter key and returns the value array
+    #joins with new line character
+  end
 
+  def print_character(letter)
+    #require 'pry'; binding.pry
+    @characters[letter].each_with_index do |braille, index|
+      if index == 0
+        @top << braille
+      elsif index == 1
+        @middle << braille
+      elsif index == 2
+        @bottom << braille
+      end
+    end
+  end
+
+  def print_words(word)
+    character = word.split("")
+    character.each { |letter| print_character(letter)}
+    line_1 = @top.join("")
+    line_2 = @middle.join("")
+    line_3 = @bottom.join("")
+    line_1 + "\n" + line_2 + "\n" + line_3
   end
 
 end

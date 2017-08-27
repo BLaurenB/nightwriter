@@ -33,4 +33,18 @@ class NightWriterTest < Minitest::Test
     assert_equal braille3, translator.print_letter('-')
   end
 
+  def test_print_words_returns_translation_in_braille
+    translator = NightWriter.new
+    braille1 = "000..0\n....00\n....0."
+    braille2 = "000.00\n.0.000..0..."
+    braille3 = "0..00.00\n0.0.00.0\n....0..."
+
+    assert_equal braille1, translator.print_words('cat')
+    assert_equal braille2, translator.print_words('dog')
+    assert_equal braille3, translator.print_words('bird')
+
+
+
+  end
+
 end
