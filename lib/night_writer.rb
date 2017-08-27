@@ -1,6 +1,7 @@
 class NightWriter
 
   attr_reader :characters, :top, :middle, :bottom
+
   def initialize
     @characters = {'a' => ['0.', '..', '..'],
     'b' => ['0.', '0.', '..'],
@@ -52,10 +53,10 @@ class NightWriter
     @bottom = []
   end
 
-
   def print_character(character)
-    #require 'pry'; binding.pry
     @characters[character].each_with_index do |braille, index|
+      #looks at the vaule associated to the character key and it's index
+      #depending on the index the value will be stored in an empty array
       if index == 0
         @top << braille
       elsif index == 1
