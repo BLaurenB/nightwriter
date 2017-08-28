@@ -1,6 +1,6 @@
 class NightWriter
 
-  attr_reader :characters
+  attr_reader :characters, :top, :middle, :bottom
 
   def initialize
     @characters = {'a' => ['0.', '..', '..'],
@@ -48,11 +48,39 @@ class NightWriter
     '8' => ['0.', '00', '..'],
     '9' => ['.0', '0.', '..'],
     ' ' => ['..', '..', '..'] }
+    @top = []
+    @middle = []
+    @bottom = []
   end
 
-  def print_letter(letter)
-    @characters[letter].join "\n"
+  def print_character(character)
+    @characters[character].each_with_index do |braille, index|
+      #looks at the vaule associated to the character key and it's index
+      #depending on the index the value will be stored in an empty array
+      if index == 0
+        @top << braille
+      elsif index == 1
+        @middle << braille
+      elsif index == 2
+        @bottom << braille
+      end
+    end
+  end
 
+  def print_words(word)
+    single_characters = word.split("")
+    #splits word into characters
+    single_characters.each { |character| print_character(character)}
+    #should be sending one character at a time to print_character method
+    line_1 = @top.join("")
+    line_2 = @middle.join("")
+    line_3 = @bottom.join("")
+    #reset the array's to empty for next word
+    @top = []
+    @middle = []
+    @bottom = []
+    #creates one string from each array
+    line_1.concat("\n").concat(line_2).concat("\n").concat(line_3)
   end
 
 end
