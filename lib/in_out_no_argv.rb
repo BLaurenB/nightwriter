@@ -8,8 +8,11 @@ require 'pry'
 
 class InOut
 
+    attr_accessor :@file_chars_array
+
     def initialize
       @file_chars_array = []
+
     end
 
   def read_in_file
@@ -36,6 +39,6 @@ class InOut
 
 end
 
-
-inout = InOut.new
-puts inout.count_output_chars
+#Make sure to comment this out if running via pry
+# inout = InOut.new
+# puts inout.count_output_chars
