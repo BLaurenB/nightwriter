@@ -17,5 +17,4 @@ end
 #ARGV[2] = nil if using the example above
 
 test_argv = TestArgv.new
-
 test_argv.print_ARGV_elements
