@@ -53,10 +53,26 @@ class NightWriter
     @bottom = []
   end
 
-  def print_character(character)
-    @characters[character].each_with_index do |braille, index|
-      #looks at the vaule associated to the character key and it's index
-      #depending on the index the value will be stored in an empty array
+
+  def check_capitals(character)
+    if character == character.downcase
+    #checks if character is lowercase
+    elsif character == character.upcase
+    #checks if character is a capital letter
+      @top << @characters['shift'][0]
+      @middle << @characters['shift'][1]
+      @bottom << @characters['shift'][2]
+      character = character.downcase
+    end
+    character_translation(character)
+  end
+
+  def character_translation(character)
+    braille_or_empty = @characters[character] || []
+    #checks if the character is a key if not passes an empty array
+    braille_or_empty.each_with_index do |braille, index|
+    #looks at the vaule associated to the character key and it's index
+    #depending on the index the value will be stored in an empty array
       if index == 0
         @top << braille
       elsif index == 1
@@ -67,11 +83,11 @@ class NightWriter
     end
   end
 
-  def print_words(word)
+  def word_translation(word)
     single_characters = word.split("")
     #splits word into characters
-    single_characters.each { |character| print_character(character)}
-    #should be sending one character at a time to print_character method
+    single_characters.each { |character| check_capitals(character)}
+    #passes characters one at a time to check_capitals
     line_1 = @top.join("")
     line_2 = @middle.join("")
     line_3 = @bottom.join("")
