@@ -1,20 +1,36 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/in_out.rb'
+require './lib/braille.rb'
 
-class NightWriterTest < Minitest::Test
+class BrailleTest < Minitest::Test
 
-  def test_InOut_exists
-    inout = InOut.new
-    assert_instance_of InOut, inout
+  def test_braille_exists
+    braille = Braille.new
+    assert_instance_of Braille, braille
   end
 
-  def it_it_can_read_in_files #Not sure how to reallt test this!
-    inout= InOut.new
-    ! assert_nil inout.read_in_file
+  def test_it_reads_in_a_file
+    braille = Braille.new
+    assert_equal ["....\n", "..00\n", "..0.\n"], braille.read_in_file
   end
 
+  def test_it_splits_array_line_1
+    braille = Braille.new
+    braille.read_in_file
+    braille.split_lines
+    assert_equal "....\n", braille.line_1
+  end
 
+  def test_it_converts_to_text
+    braille = Braille.new(["....", "..00", "..0."])
+    assert_equal " !", braille.convert_to_text
+  end
+
+  def test_it_converts_to_text_again
+    braille = Braille.new(['000..0.0', '....0000', '0...0.0.', '0...0.0.'])
+    assert_equal "matt", braille.convert_to_text
+
+  end
 
 end

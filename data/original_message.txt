@@ -1,0 +1,1 @@
+["....\n", "..00\n", "..0.\n", "This is a new line of text."]
