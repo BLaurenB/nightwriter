@@ -1,0 +1,57 @@
+Git and GitHub workflow
+
+Two parts:
+* pulling changes that have been made by others
+* uploading changes from your branch only
+________________________________________________________________
+Pulling changes made by others:
+
+    Note: If this is the very first time you've accessed the shared repo, no need to Fork it since you're helping write the master files. Just get a clone of it.
+
+Navigate to the project folder in your terminal
+* type: git pull origin master
+
+Next create a new branch of your own to work from. You create the branch name right in the terminal:
+* type: git branch name_of_branch_to_create
+  #this creates a branch called name_of_branch_to_create ;)
+* type: git branch
+  #to verify your branch was created and you are in the right branch. You now have a branch that is your very own to work from.
+
+To work with your very own branch, you have to check it out.
+* type: git checkout name_of_the_branch_you_want
+  #until you specify otherwise, all your changes and new files will be tracked in this branch.
+
+Or, you could create and checkout a new one all at once:
+*type: git checkout -b my-new-feature-branch
+
+
+
+________________________________________________________________
+Uploading changes from your branch
+
+Navigate to the project folder in your terminal
+* type: git status
+  #to see what changes Git has been tracking. Also note if there are files you don't want to be uploaded
+* type: git add .
+  #use "add ." if you want all the files to be added. If not, type: git add file_name_here
+* type git commit -m"Your public notes here"
+* type: git push origin master
+  # this pushes your changed to the repo online
+
+
+________________________________________________________________
+Trouble!
+If someone else made changes to a file you were working in...
+
+When you 'git push origin master' and get a warning that it failed or was rejected, you need to do a pull request and manage the changes
+
+To pull:
+* type: git pull origin master
+  #if there were changes to a shared file, you will be prompted to check the differences and approve a merged file.
+*type: git statues
+  # ignore this message if you're confident in the merged vesion you approved
+
+Now go through the normal adding and pushing workflow:
+git add .
+git commit -m"Message"
+git push origin master
