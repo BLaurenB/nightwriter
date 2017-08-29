@@ -1,8 +1,6 @@
 
 class InOut
 
-  attr_accessor :argv
-
   def initialize()
     @file_chars_array = []
   end
