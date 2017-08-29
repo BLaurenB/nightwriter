@@ -5,7 +5,7 @@ require './lib/night_write'
 require './lib/dictionary'
 
 class NightWriteTest < Minitest::Test
-
+=begin
   def test_night_writer_exists
     translator = NightWrite.new
 
@@ -140,6 +140,93 @@ class NightWriteTest < Minitest::Test
     braille = "..0..00.00\n..0.0.00.0\n.0....0..."
 
     assert_equal braille, translator.word_translation('Bird')
+  end
+
+
+  def test_create_by_index_top
+    translator = NightWrite.new
+    braille = ".."
+    index = 0
+    expected = [".."]
+    actual = translator.create_braille_by_index(braille, index)
+
+    assert_equal expected, actual
+  end
+
+  def test_create_by_index_middle
+    translator = NightWrite.new
+    braille = ".."
+    index = 1
+    expected = [".."]
+    actual = translator.create_braille_by_index(braille, index)
+
+    assert_equal expected, actual
+  end
+
+  def test_create_by_index_bottom
+    translator = NightWrite.new
+    braille = ".."
+    index = 2
+    expected = [".."]
+    actual = translator.create_braille_by_index(braille, index)
+
+    assert_equal expected, actual
+  end
+
+  def test_ceate_by_index_without_index
+    translator = NightWrite.new
+    braille = ".."
+    index = 3
+    actual = translator.create_braille_by_index(braille, index)
+
+    assert_nil actual
+  end
+
+  def test_reset_lines_top
+    translator = NightWrite.new
+    translator.create_braille_by_index("..", 0)
+    translator.reset_lines
+
+    assert_equal [], translator.top
+  end
+
+  def test_reset_lines_middle
+    translator = NightWrite.new
+    translator.create_braille_by_index("..", 1)
+    translator.reset_lines
+
+    assert_equal [], translator.middle
+  end
+
+  def test_reset_lines_bottom
+    translator = NightWrite.new
+    translator.create_braille_by_index("..", 2)
+    translator.reset_lines
+
+    assert_equal [], translator.bottom
+  end
+
+  def test_word_translation_with_sentence
+    translator = NightWrite.new
+    actual = translator.word_translation("This is a short sentence.")
+    expected = "...00..0.0.....0.0....0......00.0.0..0.....00.00.00.00000.....
+..00000.0.....0.0...........0.00.00000....0..0.000.0.0...0..00
+.00.....0..0....0..0.....0..0...0.0.0..0..0...0.0...0......0.0"
+
+    assert_equal expected, actual
+  end
+=end
+
+  def test_wrap_braille
+    translator = NightWrite.new
+    characters = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    actual = translator.word_translation(characters)
+    expected = "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.\n
+    ................................................................................\n
+    ................................................................................\n
+    0.\n..\n.."
+
+    assert_equal expected, actual
   end
 
 end
