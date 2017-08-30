@@ -1,6 +1,6 @@
 module Dictionary
 
-  def self.engilish_to_braille
+  def self.english_to_braille
     {'a' => ['0.', '..', '..'],
     'b' => ['0.', '0.', '..'],
     'c' => ['00', '..', '..'],

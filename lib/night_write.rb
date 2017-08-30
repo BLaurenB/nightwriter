@@ -18,9 +18,9 @@ class NightWrite
 
   def check_capitals(character)
     if character == character.upcase
-      @top << Dictionary.engilish_to_braille['shift'][0]
-      @middle << Dictionary.engilish_to_braille['shift'][1]
-      @bottom << Dictionary.engilish_to_braille['shift'][2]
+      @top << Dictionary.english_to_braille['shift'][0]
+      @middle << Dictionary.english_to_braille['shift'][1]
+      @bottom << Dictionary.english_to_braille['shift'][2]
       character = character.downcase
     end
     character_translation(character)
@@ -37,7 +37,7 @@ class NightWrite
   end
 
   def character_translation(character)
-    braille_or_empty = Dictionary.engilish_to_braille[character] || []
+    braille_or_empty = Dictionary.english_to_braille[character] || []
     braille_or_empty.each_with_index.map do |braille, index|
       create_braille_by_index(braille, index)
     end
