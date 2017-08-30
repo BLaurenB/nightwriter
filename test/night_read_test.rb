@@ -58,7 +58,7 @@ class NightReadTest < Minitest::Test
     assert_equal "H", night_read.characters[0]
   end
 
-  def test_it_translates_to_upper_case_chars
+  def test_it_translates_to_lower_case_chars
     night_read = NightRead.new
     night_read.file_chars_array = ["0.0.0.0.0.\n", "00.00.0..0\n", "....0.0.0."]
     night_read.split_lines
@@ -68,24 +68,35 @@ class NightReadTest < Minitest::Test
     assert_equal "h", night_read.characters[0]
   end
 
+  def test_it_translates_words
+    night_read = NightRead.new
+    night_read.file_chars_array = ["..0.0.0.0.0.\n", "..00.00.0..0\n", ".0....0.0.0."]
+    night_read.split_lines
+    night_read.form_braille_set_six
+    night_read.translate_to_english_character
 
-  # def test_case_name
-  #   night_read = NightRead.new
-  #
-  #   input/actual =
-  #   output/expected =
-  #
-  #   assert... expected, actual
-  # end
+    expected = ["H", "e", "l", "l", "o"]
+    actual = night_read.characters[0..4]
 
-  # def test_case_name
-  #   night_read = NightRead.new
-  #
-  #   input/actual =
-  #   output/expected =
-  #
-  #   assert... expected, actual
-  # end
+    assert_equal expected, actual
+  end
+
+  def test_it_flattens_tp_string
+    night_read = NightRead.new
+    night_read.characters = ["H", "e", "l", "l", "o"]
+    actual = night_read.flatten_english_characters_to_string
+    expected ="Hello"
+
+    assert_equal expected, actual
+  end
+
+  def test_wrap_characters
+    night_read = NightRead.new
+    night_read.characters = "a" * 82
+    expected = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naa"
+
+    assert_equal expected, night_read.wrap_characters
+  end
 
 
 
