@@ -11,7 +11,8 @@ class NightReadTest < Minitest::Test
     night_read = NightRead.new
     assert_instance_of NightRead, night_read
   end
-  #
+
+
   # def test_it_reads_in_a_file
   #   night_read = NightRead.new
   #   assert_equal ["....\n", "..00\n", "..0.\n"], night_read.read_in_file
@@ -19,8 +20,10 @@ class NightReadTest < Minitest::Test
 
   def test_it_splits_array_line_1
     night_read = NightRead.new
-    Inout.read_in_file
+    runner = Runner.new
+    runner.read_in_file
     night_read.split_lines
+    
     assert_equal "....\n", night_read.line_1
   end
 

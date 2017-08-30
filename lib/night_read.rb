@@ -18,7 +18,6 @@ class NightRead
     @characters = []
   end
 
-
   def split_lines
     @line_1 = @file_chars_array[0]
     @line_2 = @file_chars_array[1]
@@ -26,14 +25,10 @@ class NightRead
     #take @file_chars_array and split it into 3 arrays
   end
 
-
-
   def form_braille_set_six
   #   @set_six = []
   #   #take the 1st two elements of each line -- INDEX AS VARIABLE -- then create a set_six array whic will iterate over 6 (2x3) input elements at once.
   end
-
-
 
   def translate_to_braille
   #   # start a comparison.
@@ -50,11 +45,4 @@ class NightRead
   end
 
 
-
-
-
-
-
 end
-
-#Make sure to comment this out if running via pry
