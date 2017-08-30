@@ -48,6 +48,7 @@ module Dictionary
     ' ' => ['..', '..', '..']}
   end
 
+
   def self.braille_to_english
     {["0.", "..", ".."]=>"a",
     ["0.", "0.", ".."]=>"b",
