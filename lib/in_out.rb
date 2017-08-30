@@ -11,6 +11,9 @@ class InOut
     # this returns each line of text in an array where each line is its own element
   end
 
+  def change_array_into_1_string
+  end
+
 
   def write_to_file #this works
     File.open("./data/#{ARGV[1]}", "w") do |f|

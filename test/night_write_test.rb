@@ -5,7 +5,7 @@ require './lib/night_write'
 require './lib/dictionary'
 
 class NightWriteTest < Minitest::Test
-=begin
+
   def test_night_writer_exists
     translator = NightWrite.new
 
@@ -215,18 +215,17 @@ class NightWriteTest < Minitest::Test
 
     assert_equal expected, actual
   end
-=end
 
-  def test_wrap_braille
+  def test_slice_lines
     translator = NightWrite.new
-    characters = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    actual = translator.word_translation(characters)
-    expected = "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.\n
-    ................................................................................\n
-    ................................................................................\n
-    0.\n..\n.."
+    line_1 = "0." * 41
+    line_2 = ".." * 41
+    line_3 = ".." * 41
+    actual = translator.slice_lines(line_1, line_2, line_3)
+    expected = ["0." * 40, ".." * 40 , ".." * 40 , "0." , ".." , ".."].join("\n")
 
     assert_equal expected, actual
   end
+
 
 end
