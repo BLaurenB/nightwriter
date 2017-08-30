@@ -1,47 +1,67 @@
-require "./lib/night_writer"
-# require "./lib/in_out"
-require 'pry'
-
+require "./lib/dictionary"
+require "./lib/runner"
 
 
 class NightRead
 
 
-  attr_accessor :file_chars_array, :line_1, :line_2, :line_3
+  attr_accessor :file_chars_array, :characters, :line_1, :line_2, :line_3, :set_six
 
-  def initialize(dummy_data = nil)
-    @dummy_data = dummy_data
+  def initialize
     @file_chars_array = []
     @line_1 = []
     @line_2 = []
     @line_3 = []
     @characters = []
+    @set_six = []
+    @x = 0
+    @y = 1
+    @runner = Runner.new #needed? or do we push this from the Translate class?
   end
 
-  def split_lines
+  def accept_file_chars_array_from_runner_class
+    @file_chars_array = @runner.file_chars_array
+    #should be in a multi-array form. We might need to update this to account for braille that breaks to new lines.
+  end
+
+  def split_lines #tests green
     @line_1 = @file_chars_array[0]
     @line_2 = @file_chars_array[1]
     @line_3 = @file_chars_array[2]
     #take @file_chars_array and split it into 3 arrays
   end
 
-  def form_braille_set_six
-  #   @set_six = []
-  #   #take the 1st two elements of each line -- INDEX AS VARIABLE -- then create a set_six array whic will iterate over 6 (2x3) input elements at once.
+  def form_braille_set_six #tests green
+    @set_six = [@line_1[@x..@y], @line_2[@x..@y], @line_3[@x..@y]]
   end
 
-  def translate_to_braille
-  #   # start a comparison.
-  #   # start with  [0] and compare to shift key-values.
-  #     # if [0] matches shift, compare (set_twelve[x,y].flatten) to the capitals and insert the matching alphanumeric into the write_to_file method (via @character).
-  #     # else compare [0] to the whole dictionary and insert the matching set_six into the write_to_file
-  #   #Rinse and repeat
+  def translate_to_english_character #green
+    while @x <= @line_1.length
+      if @set_six == ['..', '..', '.0']
+        @x += 2
+        @y += 2
+        form_braille_set_six
+        @characters << Dictionary.braille_to_english[@set_six].upcase
+        #skips from the shift character and the alpha character to the next un-checked braille set_six.
+      else
+        form_braille_set_six
+        @characters << Dictionary.braille_to_english[@set_six]
+      end
+      @x += 2
+      @y += 2
+    end
   end
 
-  def characters
-  #   @characters
-  #   #holds translated characters as an array
-  #   @characters.flatten.to_s
+
+  def flattern_english_characters_to_string
+    @characters.join("").flatten.to_s
+  end
+
+  def wrap_characters
+    print_chars = ""
+    while @characters.length != nil
+      print_chars.concat(@characters.slice!(0..79))
+    end
   end
 
 
