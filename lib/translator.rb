@@ -25,3 +25,12 @@ class Translator
 
 
 end
+
+translator = Translator.new
+translator.run_english_to_braille
+
+$ ruby ./lib/night_write.rb message.txt braille.txt
+Created 'braille.txt' containing 256 characters
+
+$ ruby ./lib/night_read.rb braille.txt original_message.txt
+Created 'original_message.txt' containing 256 characters.

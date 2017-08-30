@@ -1,12 +1,19 @@
+require './lib/dictionary'
+require './lib/runner'
 
 class NightWrite
 
-  attr_reader :top, :middle, :bottom, :line_1, :line_2, :line_3
+  attr_reader :top, :middle, :bottom
 
   def initialize
     @top = []
     @middle = []
     @bottom = []
+    @runner = Runner.new
+  end
+
+  def read_in_file
+    @runner.read_in_file.flatten.join("")
   end
 
   def check_capitals(character)
@@ -63,7 +70,11 @@ class NightWrite
       line_3_slice = line_3.slice!(0..79)
       main_string << line_1_slice.concat("\n").concat(line_2_slice).concat("\n").concat(line_3_slice)
     end
-    main_string.join("\n")
+    @runner.write_to_file(main_string.join("\n"))
   end
 
 end
+
+night_write = NightWrite.new
+file_as_sentence = night_write.read_in_file
+night_write.word_translation(file_as_sentence)

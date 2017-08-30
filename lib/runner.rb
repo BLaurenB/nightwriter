@@ -9,9 +9,9 @@ class Runner
     @file_chars_array = IO.readlines("./data/#{ARGV[0]}")
   end
 
-  def write_to_file #this works
+  def write_to_file(written_translation) #this works
     File.open("./data/#{ARGV[1]}", "w") do |f|
-      f.write(@insert_string_name_here)
+      f.write(written_translation)
     end
   end
 
@@ -21,4 +21,5 @@ class Runner
     @count_output_chars = @count_output_chars[0].split("").length
     "Created '#{ARGV}' containing #{@count_output_chars} characters."
   end
+
 end
