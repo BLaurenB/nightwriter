@@ -19,7 +19,7 @@ class InOut
     File.open("./data/#{ARGV[1]}", "w") do |f|
     #this opens a file to write to it.
       f.write(@file_chars_array << "This is a new line of text.")
-      #this adds another line as an array element.
+
     end
   end
 
