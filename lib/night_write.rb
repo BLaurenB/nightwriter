@@ -75,6 +75,12 @@ class NightWrite
 
 end
 
-night_write = NightWrite.new
-file_as_sentence = night_write.read_in_file
-night_write.word_translation(file_as_sentence)
+
+
+if __FILE__ == $PROGRAM_NAME
+  night_write = NightWrite.new
+  word = night_write.read_in_file
+  night_write.word_translation(word)
+  runner = Runner.new
+  runner.count_output_chars
+end

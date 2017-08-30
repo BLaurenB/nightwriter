@@ -17,9 +17,8 @@ class Runner
 
   def count_output_chars
     @count_output_chars = IO.readlines("./data/#{ARGV[1]}")
-    @count_output_chars = @count_output_chars.flatten
-    @count_output_chars = @count_output_chars[0].split("").length
-    "Created '#{ARGV}' containing #{@count_output_chars} characters."
+    @count_output_chars = @count_output_chars.flatten.join("").length
+    puts "Created '#{ARGV[1]}' containing #{@count_output_chars} characters."
   end
 
 end
