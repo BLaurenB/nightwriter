@@ -6,7 +6,7 @@ class Runner
   end
 
   def read_in_file
-    @file_colection = IO.readlines("./data/#{ARGV[0]}")
+    @file_collection = IO.readlines("./data/#{ARGV[0]}")
   end
 
   def write_to_file(written_translation) #this works

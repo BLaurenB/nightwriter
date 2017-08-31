@@ -9,6 +9,7 @@ class NightRead
 
   def initialize
     @x = 0
+    @file_collection = []
     @line_1 = []
     @line_2 = []
     @line_3 = []
@@ -36,6 +37,7 @@ class NightRead
     @line_1 = (@line_1.join("")).scan(/../)
     @line_2 = (@line_2.join("")).scan(/../)
     @line_3 = (@line_3.join("")).scan(/../)
+
   end
 
 
