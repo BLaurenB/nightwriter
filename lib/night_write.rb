@@ -17,7 +17,7 @@ class NightWrite
   end
 
   def check_capitals(character)
-    if character == character.upcase
+    if character == character.upcase && character != "\n"
       @top << Dictionary.english_to_braille['shift'][0]
       @middle << Dictionary.english_to_braille['shift'][1]
       @bottom << Dictionary.english_to_braille['shift'][2]
