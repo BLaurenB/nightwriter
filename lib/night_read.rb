@@ -9,7 +9,9 @@ class NightRead
 
   def initialize
     @x = 0
-    @y = 1
+    @line_1 = []
+    @line_2 = []
+    @line_3 = []
     @runner = Runner.new
   end
 
@@ -18,50 +20,64 @@ class NightRead
   end
 
   def split_lines
-    @line_1 = @file_collection[0].strip
-    @line_2 = @file_collection[1].strip
-    @line_3 = @file_collection[2].strip
+    a = 0
+    b = 1
+    c = 2
+
+    (@file_collection.length).times do
+      @line_1 << @file_collection[a].to_s.strip
+      @line_2 << @file_collection[b].to_s.strip
+      @line_3 << @file_collection[c].to_s.strip
+      a += 3
+      b += 3
+      c += 3
+    end
+
+    @line_1 = (@line_1.join("")).scan(/../)
+    @line_2 = (@line_2.join("")).scan(/../)
+    @line_3 = (@line_3.join("")).scan(/../)
   end
 
+
   def form_braille_set_six #tests green
-      @set_six = [@line_1[@x..@y], @line_2[@x..@y], @line_3[@x..@y]]
+      @set_six = [@line_1[@x], @line_2[@x], @line_3[@x]]
+  end
+
+  def input_to_characters
+    if @set_six == ["..", "..", ".0"]
+      @x += 1 # by this point the set_six is 2 arrays
+      form_braille_set_six
+      translate_uppercase
+    elsif @set_six == ["..", "..", ".."]
+      @characters << "*"
+    else
+      @characters << Dictionary.braille_to_english[@set_six]
+    end
+  end
+
+  def translate_uppercase
+    english_character = Dictionary.braille_to_english[@set_six]
+    if @set_six == nil || english_character == nil
+      @characters << ""
+    else
+      @characters << english_character.upcase
+    end
   end
 
   def translate_to_english_character #green
-
     @characters = []
-    while @y < @line_1.length
+    while @x < @line_1.length
       form_braille_set_six
-      if @set_six != nil
-        if @set_six == ["..", "..", ".0"]
-          @x += 2
-          @y += 2
-          form_braille_set_six
-          english_character = Dictionary.braille_to_english[@set_six]
-          if @set_six == nil || english_character == nil
-            break
-          end
-          @characters << english_character.upcase
-        elsif @set_six == ["..", "..", ".."]
-          @characters << "*"
-        else
-          @characters << Dictionary.braille_to_english[@set_six]
-        end
-      else
-        @characters << ""
-      end
-      @x += 2
-      @y += 2
+      input_to_characters
+      @x += 1
     end
   end
 
   def written_translation
     print_chars = []
-    # require 'pry'; binding.pry
     while @characters.length > 0
       print_chars << @characters.slice!(0..79)
     end
-
     @runner.write_to_file(print_chars.flatten.join("").tr("*", " "))
     puts @runner.count_output_chars
   end
@@ -73,7 +89,7 @@ if __FILE__ == $PROGRAM_NAME
   night_read = NightRead.new
   file_contents = night_read.accept_file_collection_from_runner_class
   night_read.split_lines
-  # set_six = night_read.form_braille_set_six
+  set_six = night_read.form_braille_set_six
   night_read.translate_to_english_character
   night_read.written_translation
 end

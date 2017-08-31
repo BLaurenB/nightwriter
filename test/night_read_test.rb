@@ -26,7 +26,7 @@ class NightReadTest < Minitest::Test
     night_read.file_collection = ["....\n", "..00\n", "..0.\n"]
     night_read.split_lines
 
-    assert_equal  "..00\n", night_read.line_2
+    assert_equal  "..00", night_read.line_2
   end
 
 #
@@ -81,14 +81,6 @@ class NightReadTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_it_flattens_tp_string
-    night_read = NightRead.new
-    night_read.characters = ["H", "e", "l", "l", "o"]
-    actual = night_read.flatten_english_characters_to_string
-    expected ="Hello"
-
-    assert_equal expected, actual
-  end
 
   def test_write_to_file
     night_read = NightRead.new
