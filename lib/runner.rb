@@ -2,20 +2,22 @@
 class Runner
 
   def initialize
-    @file_chars_array = []
+    @file_collection = []
   end
 
   def read_in_file
-    @file_chars_array = IO.readlines("./data/#{ARGV[0]}")
+    @file_colection = IO.readlines("./data/#{ARGV[0]}")
   end
 
   def write_to_file(written_translation) #this works
+  # require 'pry'; binding.pry
     File.open("./data/#{ARGV[1]}", "w") do |f|
       f.write(written_translation)
     end
   end
 
   def count_output_chars
+  # require 'pry'; binding.pry
     @count_output_chars = IO.readlines("./data/#{ARGV[1]}")
     @count_output_chars = @count_output_chars.flatten.join("").length
     puts "Created '#{ARGV[1]}' containing #{@count_output_chars} characters."

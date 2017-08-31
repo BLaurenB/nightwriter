@@ -15,7 +15,7 @@ class NightReadTest < Minitest::Test
 
   def test_it_splits_array_line_1
     night_read = NightRead.new
-    night_read.file_chars_array = ["....\n", "..00\n", "..0.\n"]
+    night_read.file_collection = ["....\n", "..00\n", "..0.\n"]
     night_read.split_lines
 
     assert_equal  "....\n", night_read.line_1
@@ -23,7 +23,7 @@ class NightReadTest < Minitest::Test
 
   def test_it_splits_array_line_2
     night_read = NightRead.new
-    night_read.file_chars_array = ["....\n", "..00\n", "..0.\n"]
+    night_read.file_collection = ["....\n", "..00\n", "..0.\n"]
     night_read.split_lines
 
     assert_equal  "..00\n", night_read.line_2
@@ -32,7 +32,7 @@ class NightReadTest < Minitest::Test
 #
   def test_it_splits_array_line_3
     night_read = NightRead.new
-    night_read.file_chars_array = ["....\n", "..00\n", "..0.\n"]
+    night_read.file_collection = ["....\n", "..00\n", "..0.\n"]
     night_read.split_lines
 
     assert_equal  "..0.\n", night_read.line_3
@@ -41,7 +41,7 @@ class NightReadTest < Minitest::Test
 
   def test_it_forms_a_set_six
     night_read = NightRead.new
-    night_read.file_chars_array = ["....\n", "..00\n", "..0.\n"]
+    night_read.file_collection = ["....\n", "..00\n", "..0.\n"]
     night_read.split_lines
     night_read.form_braille_set_six
 
@@ -50,7 +50,7 @@ class NightReadTest < Minitest::Test
 
   def test_it_translates_to_upper_case_chars
     night_read = NightRead.new
-    night_read.file_chars_array = ["..0.0.0.0.0.\n", "..00.00.0..0\n", ".0....0.0.0."]
+    night_read.file_collection = ["..0.0.0.0.0.\n", "..00.00.0..0\n", ".0....0.0.0."]
     night_read.split_lines
     night_read.form_braille_set_six
     night_read.translate_to_english_character
@@ -60,7 +60,7 @@ class NightReadTest < Minitest::Test
 
   def test_it_translates_to_lower_case_chars
     night_read = NightRead.new
-    night_read.file_chars_array = ["0.0.0.0.0.\n", "00.00.0..0\n", "....0.0.0."]
+    night_read.file_collection = ["0.0.0.0.0.\n", "00.00.0..0\n", "....0.0.0."]
     night_read.split_lines
     night_read.form_braille_set_six
     night_read.translate_to_english_character
@@ -70,7 +70,7 @@ class NightReadTest < Minitest::Test
 
   def test_it_translates_words
     night_read = NightRead.new
-    night_read.file_chars_array = ["..0.0.0.0.0.\n", "..00.00.0..0\n", ".0....0.0.0."]
+    night_read.file_collection = ["..0.0.0.0.0.\n", "..00.00.0..0\n", ".0....0.0.0."]
     night_read.split_lines
     night_read.form_braille_set_six
     night_read.translate_to_english_character
@@ -90,12 +90,12 @@ class NightReadTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_wrap_characters
+  def test_write_to_file
     night_read = NightRead.new
     night_read.characters = "a" * 82
     expected = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naa"
 
-    assert_equal expected, night_read.wrap_characters
+    assert_equal expected, night_read.write_to_file.print_chars.join("\n")
   end
 
 
