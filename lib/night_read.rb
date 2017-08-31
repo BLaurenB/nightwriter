@@ -41,13 +41,13 @@ class NightRead
   end
 
 
-  def form_braille_set_six #tests green
+  def form_braille_set_six 
       @set_six = [@line_1[@x], @line_2[@x], @line_3[@x]]
   end
 
   def input_to_characters
     if @set_six == ["..", "..", ".0"]
-      @x += 1 # by this point the set_six is 2 arrays
+      @x += 1
       form_braille_set_six
       translate_uppercase
     elsif @set_six == ["..", "..", ".."]
@@ -66,7 +66,7 @@ class NightRead
     end
   end
 
-  def translate_to_english_character #green
+  def translate_to_english_character
     @characters = []
     while @x < @line_1.length
       form_braille_set_six
