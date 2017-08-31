@@ -9,9 +9,8 @@ class NightRead
 
   attr_accessor :file_chars_array, :line_1, :line_2, :line_3
 
-  def initialize(dummy_data = nil)
-    @dummy_data = dummy_data
-    @file_chars_array = []
+  def initialize
+    @file_collection = []
     @line_1 = []
     @line_2 = []
     @line_3 = []
@@ -22,11 +21,10 @@ class NightRead
 
   end
 
-
   def split_lines()
-    @line_1 = @file_chars_array[0]
-    @line_2 = @file_chars_array[1]
-    @line_3 = @file_chars_array[2]
+    @line_1 = @file_collection[0]
+    @line_2 = @file_collection[1]
+    @line_3 = @file_collection[2]
     #take @file_chars_array and split it into 3 arrays
   end
 
