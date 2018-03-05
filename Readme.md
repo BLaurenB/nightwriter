@@ -4,16 +4,18 @@ From http://backend.turing.io/module1/projects/night_writer :
 # NIGHTWRITER
 ## Base Expectations
 
-The tool is used from the command line like so:
+The tool is used from the command line like so with a terminal message:
 
 `$ ruby ./lib/night_write.rb message.txt braille.txt`
-Created 'braille.txt' containing 256 characters
+
+`Created 'braille.txt' containing 256 characters`
 That will use the plaintext file message.txt to create a Braille simulation file braille.txt.
 
-Then we can convert that Braille simulation back to normal text:
+Then we can convert that Braille simulation back to normal text with a terminal message:
 
 `$ ruby ./lib/night_read.rb braille.txt original_message.txt`
-Created 'original_message.txt' containing 256 characters.
+
+`Created 'original_message.txt' containing 256 characters.`
 
 
 ## Simulating Braille
